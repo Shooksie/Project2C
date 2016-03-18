@@ -6,8 +6,8 @@
 using namespace std;
 
 class Elevator {
-private:
 	friend class Building;
+private:
 	int numPeople, level;
 	list<Person> people;
 	list<Floor>:: iterator current_floor;
@@ -22,4 +22,5 @@ public:
 	bool hasRequests();
 	bool isDown();
 	void checkPeople();
+	void addPerson(Person newP);
 };
