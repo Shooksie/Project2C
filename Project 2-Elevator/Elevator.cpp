@@ -32,6 +32,7 @@ int Elevator::getNumPeople(){
   return numPeople;
 }
 
+// NOT DONE
 bool Elevator::isUp(){
   return !floorCallsUp.empty();
 }
@@ -40,6 +41,7 @@ bool Elevator::hasRequests(){
   return !floorCalls.empty();
 }
 
+// NOT DONE
 bool Elevator::isDown(){
   return !floorCallsDown.empty();
 }
