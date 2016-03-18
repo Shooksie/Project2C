@@ -51,3 +51,7 @@ void Elevator::checkPeople(){
     }
   }
 }
+
+void Elevator::addPerson(Person newP){
+  people.push_back(newP);
+}
