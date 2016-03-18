@@ -1,18 +1,25 @@
 #include <iostream>
-#include <string>
 #include <cstdlib>
 #include "Person.h"
+#include "Building.h"
 
 using namespace std;
 
-
-class elevator {
+class Elevator {
 private:
-	int currentNo, level;
-	person numberOfPeople[10];
+	friend class Building;
+	int numPeople, level;
+	list<Person> people;
+	list<Floor>:: iterator current_floor;
+	
 public:
-	void MoveUp();
-	void MoveDown();
-	int getCurrent();
-
+	Elevator();
+	void moveUp();
+	void moveDown();
+	int getLevel();
+	int getNumPeople();
+	bool isUp();
+	bool hasRequests();
+	bool isDown();
+	void checkPeople();
 };
