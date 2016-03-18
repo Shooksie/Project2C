@@ -11,9 +11,9 @@ class building {
 		bool elevator=false;
 	};
 	list<floor> frame;
-	queue<person> floorCalls;//Contains all Floor Calls
-	queue<person> floorCallsUp;//Conatins all Floor Calls that are Up
-	queue<person> floorCallsDown;//Contains All Floors Calls that are going down
+	queue<int> floorCalls;//Contains all Floor Calls
+	queue<int> floorCallsUp;//Conatins all Floor Calls that are Up
+	queue<int> floorCallsDown;//Contains All Floors Calls that are going down
 	int numberFloors;
 public:
 	building();

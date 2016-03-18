@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Elevator.cpp" />
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="Resources\airline_simulation.cpp" />
     <ClCompile Include="Resources\Passenger.cpp" />
     <ClCompile Include="main.cpp" />
