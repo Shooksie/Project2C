@@ -1,5 +1,4 @@
 #pragma once
-#pragma warning disable 4430, 3646
 #include <iostream>
 #include <cstdlib>
 #include <list>
@@ -12,6 +11,7 @@ class elevate {
 private:
 	int numPeople = 0;
 	int level = 0;
+	bool Up, Down;
 	
 public:
 	list<person> people;
