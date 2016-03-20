@@ -10,6 +10,7 @@ private:
 	bool goingUP;
 public:
 	person();
+	person(int floors);
 	int getID();
 	void setID(int number);
 	int getCurrentFloor();

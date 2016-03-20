@@ -10,6 +10,16 @@ person::person() {
 	personID = 0;
 }
 
+person::person(int floors) {
+	current_floor = rand() % floors;
+	desired_floor = rand() % floors;
+	while (current_floor == desired_floor) {
+		desired_floor = rand() % floors;
+	}
+	personID = 0;
+
+}
+
 int person::getID() {
 	return personID;
 }
