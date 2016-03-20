@@ -1,5 +1,4 @@
 #pragma once
-#pragma warning disable 4430, 3646
 #include "Elevator.h"
 #include "Person.h"
 #include "floor.h"

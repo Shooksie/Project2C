@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <list>
 #include "Person.h"
-#include "Building.h"
 #include "floor.h"
 
 using namespace std;
