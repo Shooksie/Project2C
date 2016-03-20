@@ -1,21 +1,22 @@
+#pragma once
+#pragma warning disable 4430, 3646
 #include <iostream>
 #include <cstdlib>
+#include <list>
 #include "Person.h"
 #include "Building.h"
 #include "floor.h"
 
 using namespace std;
 
-class Elevator {
-	friend class floor;
+class elevate {
 private:
-	friend class Building;
-	int numPeople, level;
+	int numPeople = 0;
+	int level = 0;
 	list<person> people;
-	list<floor>::iterator current_floor;
 	
 public:
-	Elevator();
+	list<Floor>::iterator current_floor;
 	void moveUp();
 	void moveDown();
 	int getLevel();
@@ -24,4 +25,5 @@ public:
 	bool hasRequests();
 	bool isDown();
 	void checkPeople();
+	void ConnectItr(list<Floor> List);
 };

@@ -15,7 +15,7 @@ void building::setFloor(int floorNumber) {
 		numberFloors = floorNumber;
 		for (int i = 0; i < floorNumber; i++)
 		{
-			floor temp;
+			Floor temp;
 			temp.floorNo = i;
 			frame.push_back(temp);
 		}
@@ -25,15 +25,21 @@ void building::setFloor(int floorNumber) {
 
 
 int building::getCurFloor() {
-	list<floor>::iterator itr;
+	list<Floor>::iterator itr;
 	for (itr = frame.begin(); itr != frame.end(); itr++) {
 		if(itr->elevator){
 			return itr->floorNo;
 		}
 	}
+	return NULL;
 }
 
 person building::generate() {
 	person Person;
 	return Person;
+}
+
+void building::Connect() {
+
+	elvator.ConnectItr(frame);
 }

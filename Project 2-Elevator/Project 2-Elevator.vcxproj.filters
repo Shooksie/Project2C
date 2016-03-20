@@ -24,18 +24,6 @@
     <ClInclude Include="Building.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Airline_Checkin_Sim.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Passenger.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Passenger_Queue.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources\Random.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="floor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -43,9 +31,6 @@
   <ItemGroup>
     <ClCompile Include="Elevator.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources\Passenger.cpp">
-      <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Building.cpp">
       <Filter>Source Files</Filter>

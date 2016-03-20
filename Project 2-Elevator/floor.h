@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class floor {
+class Floor {
 public:
 	int floorNo;
 	bool elevator = false;
