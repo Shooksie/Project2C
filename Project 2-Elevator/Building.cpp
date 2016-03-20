@@ -1,5 +1,5 @@
-#include "Building.h"
 
+#include "Building.h"
 
 using namespace std;
 
@@ -31,4 +31,9 @@ int building::getCurFloor() {
 			return itr->floorNo;
 		}
 	}
+}
+
+person building::generate() {
+	person Person;
+	return Person;
 }

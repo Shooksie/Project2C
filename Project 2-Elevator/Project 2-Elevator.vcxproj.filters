@@ -36,13 +36,13 @@
     <ClInclude Include="Resources\Random.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="floor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Elevator.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources\airline_simulation.cpp">
-      <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Resources\Passenger.cpp">
       <Filter>Resource Files</Filter>

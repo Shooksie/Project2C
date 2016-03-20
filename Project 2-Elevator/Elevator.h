@@ -2,15 +2,17 @@
 #include <cstdlib>
 #include "Person.h"
 #include "Building.h"
+#include "floor.h"
 
 using namespace std;
 
 class Elevator {
+	friend class floor;
 private:
 	friend class Building;
 	int numPeople, level;
-	list<Person> people;
-	list<Floor>:: iterator current_floor;
+	list<person> people;
+	list<floor>::iterator current_floor;
 	
 public:
 	Elevator();
