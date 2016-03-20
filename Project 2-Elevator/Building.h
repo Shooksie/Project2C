@@ -7,10 +7,11 @@
 #include <queue>
 
 class building {
+	list<person> peopleInside;
 	list<Floor> frame;
-	queue<int> floorCalls;//Contains all Floor Calls
-	queue<int> floorCallsUp;//Conatins all Floor Calls that are Up
-	queue<int> floorCallsDown;//Contains All Floors Calls that are going down
+	list<int> floorCalls;//Contains all Floor Calls
+	list<int> floorCallsUp;//Conatins all Floor Calls that are Up
+	list<int> floorCallsDown;//Contains All Floors Calls that are going down
 	int numberFloors;//Contains the total number of floors
 public:
 	void Connect();
@@ -18,9 +19,7 @@ public:
 	building(int floorNumber);//used for the custom building case
 	void setFloor(int floorNumber);//is used to set the floor number and update the floors to work with the new building
 	int getCurFloor();//returns where the elevator is currently
-	void getElevator();
 	void getFloorCalls();
-	person generate();
-	void moveElevator();
+	void generate();
 	elevate elvator;
 };
