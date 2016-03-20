@@ -12,9 +12,11 @@ void main(){
 		cin >> choice;
 		switch (choice) {
 
-		case 1:
-			building Building();
+		case 1:if(true){
+			building Building;
+			Building.simulate();
 			break;
+		}
 		case 2:
 			if (true) {
 				int floorNumber;

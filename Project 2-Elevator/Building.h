@@ -13,6 +13,7 @@ class building {
 	list<int> floorCallsDown;//Contains All Floors Calls that are going down
 	int numberFloors;//Contains the total number of floors
 public:
+	void simulate();
 	void Connect();
 	building();//used for the defult case building
 	building(int floorNumber);//used for the custom building case
