@@ -11,6 +11,7 @@ class elevate {
 private:
 	int numPeople = 0;
 	int level = 0;
+	bool Up, Down;
 	
 public:
 	list<person> people;
