@@ -15,5 +15,5 @@ public:
 	int getCurrentFloor();
 	int getDesiredFloor();
 	bool getDirection();
-
+	
 };
