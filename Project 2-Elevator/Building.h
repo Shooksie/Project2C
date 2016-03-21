@@ -30,4 +30,5 @@ public:
 	elevate elvator;
 	void moveToFloor(call floors);
 	void moveNostop(call floors);
+	void generate(int traffic, int floors);
 };
