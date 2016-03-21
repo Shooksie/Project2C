@@ -45,3 +45,14 @@ void elevate::checkPeople(){
 void elevate::ConnectItr(list<Floor> List){
 	current_floor = List.begin();
 }
+
+bool elevate::isFull(){
+	return (numPeople == 10);
+}
+
+void elevate::addPerson(person newP){
+	if (!isFull()){
+		people.pushback(newP);
+		numPeople++;
+	}
+}
