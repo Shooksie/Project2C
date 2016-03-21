@@ -25,4 +25,6 @@ public:
 	bool isDown();
 	void checkPeople();
 	void ConnectItr(list<Floor> List);
+	bool isFull();
+	void addPerson(person newP);
 };
