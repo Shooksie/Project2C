@@ -6,6 +6,7 @@
 #include <queue>
 
 class building {
+	friend class elevate;
 	list<person> peopleInside;
 	list<Floor> frame;
 	struct call {
@@ -13,8 +14,6 @@ class building {
 		bool up = true;
 	};
 	list<call> floorCalls;//Contains all Floor Calls
-	list<int> floorCallsUp;//Conatins all Floor Calls that are Up
-	list<int> floorCallsDown;//Contains All Floors Calls that are going down
 	int numberFloors;//Contains the total number of floors
 public:
 	void simulate();
@@ -23,7 +22,6 @@ public:
 	building(int floorNumber);//used for the custom building case
 	void setFloor(int floorNumber);//is used to set the floor number and update the floors to work with the new building
 	int getCurFloor();//returns where the elevator is currently
-	void getFloorCalls();
 	void generate();
 	void generate(int traffic, int floors);
 	void checkUpcalls(int CurrentFloor);
@@ -31,4 +29,6 @@ public:
 	void removeCall(int floorNumber, bool up);
 	void checkCalls();
 	elevate elvator;
+	void moveToFloor(call floors);
+	void moveNostop(call floors);
 };

@@ -12,10 +12,11 @@ private:
 	int numPeople = 0;
 	int level = 0;
 	bool Up, Down;
-	
+
 public:
 	list<person> people;
 	list<Floor>::iterator current_floor;
+	list<int> destinations;
 	void moveUp();
 	void moveDown();
 	int getLevel();
@@ -27,5 +28,4 @@ public:
 	void ConnectItr(list<Floor> List);
 	bool isFull();
 	void addPerson(person newP);
-	void removePerson(person leaving);
 };

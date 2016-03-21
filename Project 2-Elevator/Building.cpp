@@ -25,18 +25,12 @@ void building::setFloor(int floorNumber) {
 			frame.push_back(temp);
 		}
 	}
-return;
+	return;
 }
 
 
 int building::getCurFloor() {
-	list<Floor>::iterator itr;
-	for (itr = frame.begin(); itr != frame.end(); itr++) {
-		if(itr->elevator){
-			return itr->floorNo;
-		}
-	}
-	return NULL;
+	return elvator.getLevel();
 }
 
 void building::generate() {
@@ -46,13 +40,7 @@ void building::generate() {
 	person.floorID = Person.getCurrentFloor();
 	person.up = Person.getDirection();
 	floorCalls.push_back(person);
-	if (Person.getDirection()) {
-		floorCallsUp.push_back(Person.getCurrentFloor());
-		return;
-	}
-	else {
-		floorCallsDown.push_back(Person.getCurrentFloor());
-	}
+	
 	return;
 }
 
@@ -130,11 +118,9 @@ void building::generate(int traffic, int floors) {
 	}
 }
 
-
-
 void building::Connect() {
 
-	elvator.ConnectItr(frame);
+	elvator.current_floor = frame.begin();
 }
 
 void building::checkUpcalls(int CurrentFloor){
@@ -153,6 +139,7 @@ void building::checkUpcalls(int CurrentFloor){
 		}
 	}
 }
+
 void building::checkDwncalls(int currentFloor) {
 	list<person>::iterator itr2;
 	for (itr2 = peopleInside.begin(); itr2 != peopleInside.end(); itr2++) {
@@ -168,6 +155,7 @@ void building::checkDwncalls(int currentFloor) {
 		}
 	}
 }
+
 void building::removeCall(int floorNumber, bool up) {
 	list<call>::iterator itr;
 	for (itr = floorCalls.begin(); itr != floorCalls.end(); itr++) {
@@ -177,121 +165,66 @@ void building::removeCall(int floorNumber, bool up) {
 	}
 }
 
+void building::moveToFloor(call floors) {
+	while (elvator.getLevel() != floors.floorID) {
+		if (elvator.getLevel() < floors.floorID) {
+			while (!elvator.isFull() && !floorCalls.empty()) {
+				checkUpcalls(elvator.getLevel());
+				elvator.moveUp();
+			}
+			elvator.moveUp();
+		}
+		else if (elvator.getLevel() > floors.floorID) {
+			{
+				while (!elvator.isFull() && !floorCalls.empty()) {
+					checkDwncalls(elvator.getLevel());
+					elvator.moveDown();
+				}
+				if (elvator.isFull() && elvator.getLevel() != floors.floorID) {
+					while (elvator.getLevel() != floors.floorID) {
+						elvator.moveDown();
+					}
+				}
+			}
+		}
+	}
+}
+
+void building::moveNostop(call floors) {
+	while (elvator.getLevel() != floors.floorID)
+	{
+		if (elvator.getLevel() < floors.floorID) {
+			elvator.moveUp();
+			checkUpcalls(elvator.getLevel());
+		}
+		else if (elvator.getLevel() > floors.floorID) {
+			elvator.moveDown();
+			checkUpcalls(elvator.getLevel());
+		}
+	}
+}
+
 void building::checkCalls() {
 	while (!floorCalls.empty()) {
 		if (floorCalls.size() == 1) {
 			call floors = floorCalls.front();
 			floorCalls.pop_front();
-			while (elvator.getLevel() != floors.floorID)
-			{
-				if (elvator.getLevel() < floors.floorID) {
-					elvator.moveUp();
-				}
-				else if(elvator.getLevel() > floors.floorID){
-					elvator.moveDown();
-				}
-			}
+			moveNostop(floors);
 		}
 		else {
 			call floors = floorCalls.front();
 			floorCalls.pop_front();
-			while (elvator.getLevel() != floors.floorID) {
-				if (elvator.getLevel() < floors.floorID) {
-					while (!elvator.isFull() && !floorCalls.empty()) {
-						checkUpcalls(elvator.getLevel());
-						elvator.moveUp();
-					}
-					elvator.moveUp();
-				}
-				else {
-					while (!elvator.isFull() && !floorCalls.empty()) {
-						checkDwncalls(elvator.getLevel());
-						elvator.moveDown();
-					}
-					elvator.moveDown();
-				}
-			}
+			moveToFloor(floors);
 		}
 	}
-}
-/*
-void building::getFloorCalls() {
-	int index = 0;
-	while (!floorCalls.empty()) {
-		cout << index;
-		index++;
-		int nextFlor = floorCalls.front();
-		//check to see in which direction the elevator is going
-		if (elvator.getLevel() < nextFlor) {
-			//over here the elevator is going up
-			list<int>::iterator itr = floorCallsUp.begin();//iterator is used to check all the floor calls that are going up
-			while (elvator.getLevel() <= nextFlor) {
-				while (itr != floorCallsUp.end()) {
-					//while loop to check all floor calls going down
-					if (*itr == elvator.getLevel()) {
-						//checks to see if the floor call is on the way of the elevator or not
-						list<person>::iterator itr2 = peopleInside.begin();
-						while (itr2 != peopleInside.end()) {
-							if (*itr == itr2->getCurrentFloor() && itr2->getDirection()) {
-								elvator.people.push_back(*itr2);
-								peopleInside.erase(itr2);
-							}
-							itr2++;
-						}
-						list<person>::iterator itr3 = elvator.people.begin();
-						while (itr3 != elvator.people.end()) {
-							if (elvator.getLevel() == itr3->getDesiredFloor()) {
-
-								elvator.people.erase(itr3);
-							}
-
-							itr3++;
-						}
-					}
-					itr++;
-				}
-				elvator.current_floor++;
-			}
-
-		}
-		if (elvator.getLevel() > nextFlor) {
-			list<int>::iterator itr = floorCallsDown.begin();//iterator is used to check all the floor calls that are going up
-			while (elvator.getLevel() >= nextFlor) {
-				while (itr != floorCallsDown.end()) {
-					//while loop to check all floor calls going down
-					if (*itr == elvator.getLevel()) {
-						//checks to see if the floor call is on the way of the elevator or not
-						list<person>::iterator itr2 = peopleInside.begin();
-						while (itr2 != peopleInside.end()) {
-							if (*itr == itr2->getCurrentFloor() && !(itr2->getDirection())) {
-								elvator.people.push_back(*itr2);
-								peopleInside.erase(itr2);
-							}
-							itr2++;
-						}
-						list<person>::iterator itr3 = elvator.people.begin();
-						while (itr3 != elvator.people.end()) {
-							if (elvator.getLevel() == itr3->getDesiredFloor()) {
-
-								elvator.people.erase(itr3);
-							}
-
-							itr3++;
-						}
-					}
-					itr++;
-				}
-				elvator.current_floor--;
-			}
-		}
-		floorCalls.pop_front();
+	if (floorCalls.empty()) {
+		return;
 	}
 }
 
-*/
-void building::simulate() {
+void building::simulate(){
 	int index = 0;
-	while (index < 1000) {
+	while (index < 10) {
 		checkCalls();
 		generate();
 		index++;

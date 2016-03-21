@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void main(){
+void main() {
 	bool reloop = true;
 	while (reloop) {
 		list <person> People;
@@ -16,9 +16,9 @@ void main(){
 		cin >> choice;
 		switch (choice) {
 
-		case 1:if(true){
+		case 1:if (true) {
 			building Building;
-			
+
 			cout << possiblePeople << endl;
 
 			for (int i = 0; i < possiblePeople; i++) {
@@ -26,7 +26,7 @@ void main(){
 				numberOfPeople++;
 			}
 
-			
+
 			break;
 		}
 		case 2:
@@ -40,7 +40,7 @@ void main(){
 				Building.setFloor(floorNumber);
 				cout << "specify the type of traffic?" << endl << "1. low " << endl << "2. medium" << endl << "3. high" << endl << ">>";
 				cin >> typeOfTraffic;
-				cout << "specify the number of elevators?" << endl << ">>" ;
+				cout << "specify the number of elevators?" << endl << ">>";
 				cin >> NumberElevators;
 
 				Building.generate(typeOfTraffic, floorNumber);
