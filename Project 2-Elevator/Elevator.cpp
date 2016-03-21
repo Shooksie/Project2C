@@ -54,5 +54,16 @@ void elevate::addPerson(person newP){
 	if (!isFull()){
 		people.pushback(newP);
 		numPeople++;
+		return;
+	}
+}
+
+void elevate::removePerson(person leaving){
+	list<person>::iterator itr;
+	for (itr = people.begin(); itr != people.end(); ++itr){
+		if (itr->getID() == leaving.getID()){
+			people.erase(itr);
+			numPeople--;
+		}
 	}
 }
