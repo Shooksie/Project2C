@@ -45,7 +45,7 @@ void elevate::checkPeople(){
 	// person leaves elevator
 	list<person>::iterator itr1;
 	for (itr1 = people.begin(); itr1 != people.end(); ++itr1){
-		if (itr->getDesiredFloor() == level){
+		if (itr1->getDesiredFloor() == level){
 			people.erase(itr1);
 			numPeople--;
 		}
