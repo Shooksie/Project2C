@@ -1,26 +1,31 @@
+#pragma once
 #include <iostream>
 #include <cstdlib>
+#include <list>
 #include "Person.h"
-#include "Building.h"
+#include "floor.h"
 
 using namespace std;
 
-class Elevator {
-	friend class Building;
+class elevate {
 private:
-	int numPeople, level;
-	list<Person> people;
-	list<Floor>:: iterator current_floor;
+	int numPeople = 0;
+	int level = 0;
+	bool Up, Down;
 	
 public:
-	Elevator();
+	list<person> people;
+	list<Floor>::iterator current_floor;
 	void moveUp();
 	void moveDown();
 	int getLevel();
 	int getNumPeople();
-	bool isUp();
-	bool hasRequests();
-	bool isDown();
+	bool isUp(list<int> List);
+	bool hasRequests(list<int> List);
+	bool isDown(list<int> List);
 	void checkPeople();
-	void addPerson(Person newP);
+	void ConnectItr(list<Floor> List);
+	bool isFull();
+	void addPerson(person newP);
+	void removePerson(person leaving);
 };

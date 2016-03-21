@@ -17,7 +17,6 @@ person::person(int floors) {
 		desired_floor = rand() % floors;
 	}
 	personID = 0;
-
 }
 
 int person::getID() {
