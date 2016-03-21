@@ -1,59 +1,69 @@
 #include "Elevator.h"
 
+
 using namespace std;
 
-Elevator::Elevator(){
-  numPeople = 0;
-  level = 0;
-  current_floor = frame.begin();
+void elevate::moveUp(){
+	++current_floor;
+	level++;
+	checkPeople();
+}
+void elevate::moveDown(){
+	--current_floor;
+	level--;
+	checkPeople();
+}
+int elevate::getLevel(){ 
+	return level;
+}
+int elevate::getNumPeople(){ 
+	return numPeople;
+}
+bool elevate::isUp(list<int> List){ 
+	if (hasRequests(List) == false)
+		return false;
+	list<int>::iterator itr = List.begin();
+	Up = (*itr > level);
+	return Up;
+}
+bool elevate::hasRequests(list<int> List){
+	return(!List.empty());
+}
+bool elevate::isDown(list<int> List){
+	Down = !isUp(List);
+	return Down;
+}
+void elevate::checkPeople(){
+	list<person>::iterator itr;
+	for (itr = people.begin(); itr != people.end(); ++itr){
+		if (itr->getDesiredFloor() == level){
+			people.erase(itr);
+			numPeople--;
+		}
+	}
+}
+void elevate::ConnectItr(list<Floor> List){
+	current_floor = List.begin();
 }
 
-void Elevator::moveUp(){
-  /* if elevator is on top floor
-    throw std::exception("Elevator is currently on highest floor")*/
-  ++current_floor;
-  level = current_floor->floor_no;
-  checkPeople();
+bool elevate::isFull(){
+	return (numPeople == 10);
 }
 
-void Elevator::moveDown(){
-  /* if elevator is on bottom floor
-    throw std::exception("Elevator is currently on lowest floor")*/
-  --current_floor;
-  level = current_floor->floor_no;
-  checkPeople();
+void elevate::addPerson(person newP){
+	if (!isFull()){
+		people.push_back(newP);
+		numPeople++;
+		return;
+	}
 }
 
-int Elevator::getLevel(){
-  return level;
-}
-
-int Elevator::getNumPeople(){
-  return numPeople;
-}
-
-// NOT DONE
-bool Elevator::isUp(){
-  return !floorCallsUp.empty();
-}
-
-bool Elevator::hasRequests(){
-  return !floorCalls.empty();
-}
-
-// NOT DONE
-bool Elevator::isDown(){
-  return !floorCallsDown.empty();
-}
-
-void Elevator::checkPeople(){
-  for (list<person> iterator iter = people.begin(); iter != people.end(); ++iter){
-    if (level == iter->desired_floor){
-      people.erase(iter);
-    }
-  }
-}
-
-void Elevator::addPerson(Person newP){
-  people.push_back(newP);
+void elevate::removePerson(person leaving){
+	list<person>::iterator itr;
+	for (itr = people.begin(); itr != people.end(); ++itr){
+		if (itr->getID() == leaving.getID()){
+			people.erase(itr);
+			numPeople--;
+		}
+	}
 }
