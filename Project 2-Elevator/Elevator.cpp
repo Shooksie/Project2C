@@ -5,7 +5,7 @@ using namespace std;
 
 void elevate::moveUp(){
 	++current_floor;
-	level++;
+	level += 1;
 	checkPeople();
 }
 void elevate::moveDown(){

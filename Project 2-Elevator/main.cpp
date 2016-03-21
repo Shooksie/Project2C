@@ -14,6 +14,7 @@ void main(){
 
 		case 1:if(true){
 			building Building;
+			Building.Connect();
 			Building.simulate();
 			break;
 		}

@@ -6,6 +6,7 @@
 #include <queue>
 
 class building {
+	friend class elevate;
 	list<person> peopleInside;
 	list<Floor> frame;
 	struct call {

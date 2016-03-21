@@ -45,7 +45,7 @@ void building::generate() {
 
 void building::Connect() {
 
-	elvator.ConnectItr(frame);
+	elvator.current_floor = frame.begin();
 }
 
 void building::checkUpcalls(int CurrentFloor){
@@ -120,9 +120,11 @@ void building::moveNostop(call floors) {
 	{
 		if (elvator.getLevel() < floors.floorID) {
 			elvator.moveUp();
+			checkUpcalls(elvator.getLevel());
 		}
 		else if (elvator.getLevel() > floors.floorID) {
 			elvator.moveDown();
+			checkUpcalls(elvator.getLevel());
 		}
 	}
 }
