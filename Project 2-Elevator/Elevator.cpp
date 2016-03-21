@@ -5,13 +5,21 @@ using namespace std;
 
 void elevate::moveUp(){
 	++current_floor;
-	level += 1;
-	checkPeople();
+	level++;
+	list<int>::iterator itr;
+	for (itr = destinations.begin(); itr != destinations.end(); ++itr){
+		if (*itr == level)
+			checkPeople();
+	}
 }
 void elevate::moveDown(){
 	--current_floor;
 	level--;
-	checkPeople();
+	list<int>::iterator itr;
+	for (itr = destinations.begin(); itr != destinations.end(); ++itr){
+		if (*itr == level)
+			checkPeople();
+	}
 }
 int elevate::getLevel(){ 
 	return level;
@@ -34,12 +42,19 @@ bool elevate::isDown(list<int> List){
 	return Down;
 }
 void elevate::checkPeople(){
-	list<person>::iterator itr;
-	for (itr = people.begin(); itr != people.end(); ++itr){
+	// person leaves elevator
+	list<person>::iterator itr1;
+	for (itr1 = people.begin(); itr1 != people.end(); ++itr1){
 		if (itr->getDesiredFloor() == level){
-			people.erase(itr);
+			people.erase(itr1);
 			numPeople--;
 		}
+	}
+	// remove destination
+	list<int>::iterator itr2;
+	for (itr2 = destinations.begin(); itr2 != destinations.end(); ++itr2){
+		if (*itr2 == level)
+			destinations.erase(itr2);
 	}
 }
 void elevate::ConnectItr(list<Floor> List){
@@ -52,18 +67,18 @@ bool elevate::isFull(){
 
 void elevate::addPerson(person newP){
 	if (!isFull()){
+		// add person
 		people.push_back(newP);
 		numPeople++;
-		return;
-	}
-}
-
-void elevate::removePerson(person leaving){
-	list<person>::iterator itr;
-	for (itr = people.begin(); itr != people.end(); ++itr){
-		if (itr->getID() == leaving.getID()){
-			people.erase(itr);
-			numPeople--;
+		// add destination
+		if (destinations.empty())
+			destinations.push_back(newP.getDesiredFloor());
+			return;
+		list<int>::iterator itr;
+		for (itr = destinations.begin(); itr != destinations.end(); ++itr){
+			if (*itr == newP.getDesiredFloor()) // destination is already in list
+				return;
+			destinations.push_back(newP.getDesiredFloor());
 		}
 	}
 }
