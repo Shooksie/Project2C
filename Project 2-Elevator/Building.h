@@ -28,5 +28,6 @@ public:
 	void checkUpcalls(int CurrentFloor);
 	void checkDwncalls(int currentFloor);
 	void removeCall(int floorNumber, bool up);
+	void checkCalls();
 	elevate elvator;
 };

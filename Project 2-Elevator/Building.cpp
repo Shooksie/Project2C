@@ -42,7 +42,10 @@ int building::getCurFloor() {
 void building::generate() {
 	person Person;
 	peopleInside.push_front(Person);
-	floorCalls.push_back(Person.getCurrentFloor());
+	call person;
+	person.floorID = Person.getCurrentFloor();
+	person.up = Person.getDirection();
+	floorCalls.push_back(person);
 	if (Person.getDirection()) {
 		floorCallsUp.push_back(Person.getCurrentFloor());
 		return;
@@ -64,7 +67,7 @@ void building::checkUpcalls(int CurrentFloor){
 	for (itr2 = peopleInside.begin(); itr2 != peopleInside.end(); itr2++) {
 		if ((itr2->getCurrentFloor() == CurrentFloor)&& itr2->getDirection()) {
 			if (!elvator.isFull()) {
-				elvator.addPerson();
+				elvator.addPerson(*itr2);
 				peopleInside.erase(itr2);
 			}
 			else {
@@ -77,9 +80,9 @@ void building::checkUpcalls(int CurrentFloor){
 void building::checkDwncalls(int currentFloor) {
 	list<person>::iterator itr2;
 	for (itr2 = peopleInside.begin(); itr2 != peopleInside.end(); itr2++) {
-		if ((itr2->getCurrentFloor() == CurrentFloor) && !itr2->getDirection()) {
+		if ((itr2->getCurrentFloor() == currentFloor) && !itr2->getDirection()) {
 			if (!elvator.isFull()) {
-				elvator.addPerson();
+				elvator.addPerson(*itr2);
 				peopleInside.erase(itr2);
 			}
 			else {
@@ -97,6 +100,45 @@ void building::removeCall(int floorNumber, bool up) {
 		}
 	}
 }
+
+void building::checkCalls() {
+	while (!floorCalls.empty()) {
+		if (floorCalls.size() == 1) {
+			call floors = floorCalls.front();
+			floorCalls.pop_front();
+			while (elvator.getLevel() != floors.floorID)
+			{
+				if (elvator.getLevel() < floors.floorID) {
+					elvator.moveUp();
+				}
+				else if(elvator.getLevel() > floors.floorID){
+					elvator.moveDown();
+				}
+			}
+		}
+		else {
+			call floors = floorCalls.front();
+			floorCalls.pop_front();
+			while (elvator.getLevel() != floors.floorID) {
+				if (elvator.getLevel() < floors.floorID) {
+					while (!elvator.isFull() && !floorCalls.empty()) {
+						checkUpcalls(elvator.getLevel());
+						elvator.moveUp();
+					}
+					elvator.moveUp();
+				}
+				else {
+					while (!elvator.isFull() && !floorCalls.empty()) {
+						checkDwncalls(elvator.getLevel());
+						elvator.moveDown();
+					}
+					elvator.moveDown();
+				}
+			}
+		}
+	}
+}
+/*
 void building::getFloorCalls() {
 	int index = 0;
 	while (!floorCalls.empty()) {
@@ -170,11 +212,11 @@ void building::getFloorCalls() {
 	}
 }
 
-
+*/
 void building::simulate() {
 	int index = 0;
 	while (index < 1000) {
-		getFloorCalls();
+		checkCalls();
 		generate();
 		index++;
 	}

@@ -52,7 +52,7 @@ bool elevate::isFull(){
 
 void elevate::addPerson(person newP){
 	if (!isFull()){
-		people.pushback(newP);
+		people.push_back(newP);
 		numPeople++;
 	}
 }
