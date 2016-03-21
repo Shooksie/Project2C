@@ -20,9 +20,9 @@ public:
 	void moveDown();
 	int getLevel();
 	int getNumPeople();
-	bool isUp();
-	bool hasRequests();
-	bool isDown();
+	bool isUp(list<int> List);
+	bool hasRequests(list<int> List);
+	bool isDown(list<int> List);
 	void checkPeople();
 	void ConnectItr(list<Floor> List);
 };

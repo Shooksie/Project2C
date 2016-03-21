@@ -58,6 +58,45 @@ void building::Connect() {
 	elvator.ConnectItr(frame);
 }
 
+void building::checkUpcalls(int CurrentFloor){
+	//adds all people going up to the elevator
+	list<person>::iterator itr2;
+	for (itr2 = peopleInside.begin(); itr2 != peopleInside.end(); itr2++) {
+		if ((itr2->getCurrentFloor() == CurrentFloor)&& itr2->getDirection()) {
+			if (!elvator.isFull()) {
+				elvator.addPerson();
+				peopleInside.erase(itr2);
+			}
+			else {
+				return;
+			}
+
+		}
+	}
+}
+void building::checkDwncalls(int currentFloor) {
+	list<person>::iterator itr2;
+	for (itr2 = peopleInside.begin(); itr2 != peopleInside.end(); itr2++) {
+		if ((itr2->getCurrentFloor() == CurrentFloor) && !itr2->getDirection()) {
+			if (!elvator.isFull()) {
+				elvator.addPerson();
+				peopleInside.erase(itr2);
+			}
+			else {
+				return;
+			}
+
+		}
+	}
+}
+void building::removeCall(int floorNumber, bool up) {
+	list<call>::iterator itr;
+	for (itr = floorCalls.begin(); itr != floorCalls.end(); itr++) {
+		if ((itr->floorID == floorNumber) && up == itr->up) {
+			floorCalls.erase(itr);
+		}
+	}
+}
 void building::getFloorCalls() {
 	int index = 0;
 	while (!floorCalls.empty()) {

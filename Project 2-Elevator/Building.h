@@ -8,7 +8,11 @@
 class building {
 	list<person> peopleInside;
 	list<Floor> frame;
-	list<int> floorCalls;//Contains all Floor Calls
+	struct call {
+		int floorID;
+		bool up = true;
+	};
+	list<call> floorCalls;//Contains all Floor Calls
 	list<int> floorCallsUp;//Conatins all Floor Calls that are Up
 	list<int> floorCallsDown;//Contains All Floors Calls that are going down
 	int numberFloors;//Contains the total number of floors
@@ -21,5 +25,8 @@ public:
 	int getCurFloor();//returns where the elevator is currently
 	void getFloorCalls();
 	void generate();
+	void checkUpcalls(int CurrentFloor);
+	void checkDwncalls(int currentFloor);
+	void removeCall(int floorNumber, bool up);
 	elevate elvator;
 };
