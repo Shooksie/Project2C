@@ -36,8 +36,10 @@ bool elevate::isDown(list<int> List){
 void elevate::checkPeople(){
 	list<person>::iterator itr;
 	for (itr = people.begin(); itr != people.end(); ++itr){
-		if (itr->getDesiredFloor() == level)
+		if (itr->getDesiredFloor() == level){
 			people.erase(itr);
+			numPeople--;
+		}
 	}
 }
 void elevate::ConnectItr(list<Floor> List){
