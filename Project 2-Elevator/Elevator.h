@@ -11,7 +11,6 @@ class elevate {
 private:
 	int numPeople = 0;
 	int level = 0;
-	bool Up, Down;
 
 public:
 	list<person> people;
@@ -22,9 +21,7 @@ public:
 	void moveDown();
 	int getLevel();
 	int getNumPeople();
-	bool isUp(list<int> List);
 	bool hasRequests(list<int> List);
-	bool isDown(list<int> List);
 	void checkPeople();
 	void ConnectItr(list<Floor> List);
 	bool isFull();
