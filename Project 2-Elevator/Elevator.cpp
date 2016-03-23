@@ -36,20 +36,11 @@ int elevate::getLevel() {
 int elevate::getNumPeople() {
 	return numPeople;
 }
-bool elevate::isUp(list<int> List) {
-	if (hasRequests(List) == false)
-		return false;
-	list<int>::iterator itr = List.begin();
-	Up = (*itr > level);
-	return Up;
-}
+
 bool elevate::hasRequests(list<int> List) {
 	return(!List.empty());
 }
-bool elevate::isDown(list<int> List) {
-	Down = !isUp(List);
-	return Down;
-}
+
 void elevate::checkPeople() {
 	// person leaves elevator
 	list<person>::iterator itr1;
