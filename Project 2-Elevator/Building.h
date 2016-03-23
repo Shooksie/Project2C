@@ -5,6 +5,8 @@
 #include <list>
 #include <queue>
 
+using namespace std;
+
 class building {
 	friend class elevator;
 	struct floor {

@@ -237,3 +237,4 @@ person building::generate() {
 	person Person;
 	return Person;
 }
+
