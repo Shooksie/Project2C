@@ -150,15 +150,12 @@
     <ClInclude Include="Elevator.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="Person.h" />
-    <ClInclude Include="Resources\Airline_Checkin_Sim.h" />
-    <ClInclude Include="Resources\Passenger.h" />
-    <ClInclude Include="Resources\Passenger_Queue.h" />
-    <ClInclude Include="Resources\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Elevator.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Resources\airline_simulation.cpp" />
     <ClCompile Include="Resources\Passenger.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
