@@ -17,6 +17,7 @@ public:
 	list<person> people;
 	list<Floor>::iterator current_floor;
 	list<int> destinations;
+	void move();
 	void moveUp();
 	void moveDown();
 	int getLevel();
