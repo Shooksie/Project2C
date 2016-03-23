@@ -3,6 +3,15 @@
 
 using namespace std;
 
+void elevate::move(){
+	while (!destinations.empty()){
+		if (level < destinations.front())
+			moveUp();
+		if (level > destinations.front())
+			moveDown();
+	}
+}
+
 void elevate::moveUp() {
 	++current_floor;
 	level++;
@@ -70,15 +79,26 @@ void elevate::addPerson(person newP) {
 		// add person
 		people.push_back(newP);
 		numPeople++;
-		// add destination
-		if (destinations.empty())
-			destinations.push_back(newP.getDesiredFloor());
+		addDestination(newP.getDesiredFloor());
 		return;
-		list<int>::iterator itr;
-		for (itr = destinations.begin(); itr != destinations.end(); ++itr) {
-			if (*itr == newP.getDesiredFloor()) // destination is already in list
-				return;
-			destinations.push_back(newP.getDesiredFloor());
+	}
+}
+
+void elevate::addDestination(int dest){
+	if (destinations.empty()){
+		destinations.push_back(dest);
+		return;
+	}
+	list<int>::iterator itr;
+	for (itr = destinations.begin(); itr != destinations.end(); ++itr){
+		if (*itr == dest)
+			return;
+	}
+	for (itr = destinations.end(); itr != destinations.begin(); --itr){
+		if (*itr < dest){
+			itr++;
+			destinations.insert(dest, itr);
+			return;
 		}
 	}
 }
