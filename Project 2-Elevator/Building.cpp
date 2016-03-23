@@ -30,9 +30,6 @@ void building::setFloor(int floorNumber) {
 }
 
 
-int building::getCurFloor() {
-	return elvator.getLevel();
-}
 
 void building::generate() {
 	person Person(numberFloors);
@@ -191,19 +188,6 @@ void building::moveToFloor(call floors) {
 	}
 }
 
-void building::moveNostop(call floors) {
-	while (elvator.getLevel() != floors.floorID)
-	{
-		if (elvator.getLevel() < floors.floorID) {
-			elvator.moveUp();
-			checkUpcalls(elvator.getLevel());
-		}
-		else if (elvator.getLevel() > floors.floorID) {
-			elvator.moveDown();
-			checkUpcalls(elvator.getLevel());
-		}
-	}
-}
 
 void building::checkCalls() {
 	while (!floorCalls.empty()) {
