@@ -28,4 +28,5 @@ public:
 	void ConnectItr(list<Floor> List);
 	bool isFull();
 	void addPerson(person newP);
+	void addDestination(int dest);
 };
