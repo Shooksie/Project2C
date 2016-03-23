@@ -1,13 +1,12 @@
 #include "Elevator.h"
 
-
 using namespace std;
 
 void elevate::moveUp(){
 	++current_floor;
 	level++;
 	list<int>::iterator itr;
-	for (itr = destinations.begin(); itr != destinations.end(); ++itr){
+	for(itr = destinations.begin(); itr != destinations.end(); ++itr){
 		if (*itr == level)
 			checkPeople();
 	}
@@ -16,7 +15,7 @@ void elevate::moveDown(){
 	--current_floor;
 	level--;
 	list<int>::iterator itr;
-	for (itr = destinations.begin(); itr != destinations.end(); ++itr){
+	for(itr = destinations.begin(); itr != destinations.end(); ++itr){
 		if (*itr == level)
 			checkPeople();
 	}
@@ -28,7 +27,7 @@ int elevate::getNumPeople(){
 	return numPeople;
 }
 bool elevate::isUp(list<int> List){ 
-	if (hasRequests(List) == false)
+	if(hasRequests(List) == false)
 		return false;
 	list<int>::iterator itr = List.begin();
 	Up = (*itr > level);
@@ -45,7 +44,7 @@ void elevate::checkPeople(){
 	// person leaves elevator
 	list<person>::iterator itr1;
 	for (itr1 = people.begin(); itr1 != people.end(); ++itr1){
-		if (itr->getDesiredFloor() == level){
+		if (itr1->getDesiredFloor() == level){
 			people.erase(itr1);
 			numPeople--;
 		}
