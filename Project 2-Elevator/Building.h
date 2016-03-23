@@ -9,17 +9,17 @@ using namespace std;
 
 class building {
 	friend class elevator;
-	struct floor {
+	struct Floor {
 		int floorNo;
 		bool elevator=false;
 	};
-	list<floor> frame;
+	
+	list<Floor> frame;
 	queue<int> floorCalls;//Contains all Floor Calls
-	queue<int> floorCallsUp;//Conatins all Floor Calls that are Up
-	queue<int> floorCallsDown;//Contains All Floors Calls that are going down
 	int numberFloors;
 public:
 	building();
+	building(int number);
 	void setFloor(int floorNumber);
 	int getCurFloor();
 	void getElevator();
