@@ -28,11 +28,6 @@ void building::setFloor(int floorNumber) {
 	return;
 }
 
-
-int building::getCurFloor() {
-	return elvator.getLevel();
-}
-
 void building::generate() {
 	person Person;
 	peopleInside.push_front(Person);
@@ -48,38 +43,6 @@ void building::Connect() {
 	elvator.current_floor = frame.begin();
 }
 
-void building::checkUpcalls(int CurrentFloor){
-	//adds all people going up to the elevator
-	list<person>::iterator itr2;
-	for (itr2 = peopleInside.begin(); itr2 != peopleInside.end(); itr2++) {
-		if ((itr2->getCurrentFloor() == CurrentFloor)&& itr2->getDirection()) {
-			if (!elvator.isFull()) {
-				elvator.addPerson(*itr2);
-				peopleInside.erase(itr2);
-			}
-			else {
-				return;
-			}
-
-		}
-	}
-}
-
-void building::checkDwncalls(int currentFloor) {
-	list<person>::iterator itr2;
-	for (itr2 = peopleInside.begin(); itr2 != peopleInside.end(); itr2++) {
-		if ((itr2->getCurrentFloor() == currentFloor) && !itr2->getDirection()) {
-			if (!elvator.isFull()) {
-				elvator.addPerson(*itr2);
-				peopleInside.erase(itr2);
-			}
-			else {
-				return;
-			}
-
-		}
-	}
-}
 
 void building::removeCall(int floorNumber, bool up) {
 	list<call>::iterator itr;
@@ -90,62 +53,7 @@ void building::removeCall(int floorNumber, bool up) {
 	}
 }
 
-void building::moveToFloor(call floors) {
-	while (elvator.getLevel() != floors.floorID) {
-		if (elvator.getLevel() < floors.floorID) {
-			while (!elvator.isFull() && !floorCalls.empty()) {
-				checkUpcalls(elvator.getLevel());
-				elvator.moveUp();
-			}
-			elvator.moveUp();
-		}
-		else if (elvator.getLevel() > floors.floorID) {
-			{
-				while (!elvator.isFull() && !floorCalls.empty()) {
-					checkDwncalls(elvator.getLevel());
-					elvator.moveDown();
-				}
-				if (elvator.isFull() && elvator.getLevel() != floors.floorID) {
-					while (elvator.getLevel() != floors.floorID) {
-						elvator.moveDown();
-					}
-				}
-			}
-		}
-	}
-}
 
-void building::moveNostop(call floors) {
-	while (elvator.getLevel() != floors.floorID)
-	{
-		if (elvator.getLevel() < floors.floorID) {
-			elvator.moveUp();
-			checkUpcalls(elvator.getLevel());
-		}
-		else if (elvator.getLevel() > floors.floorID) {
-			elvator.moveDown();
-			checkUpcalls(elvator.getLevel());
-		}
-	}
-}
-
-void building::checkCalls() {
-	while (!floorCalls.empty()) {
-		if (floorCalls.size() == 1) {
-			call floors = floorCalls.front();
-			floorCalls.pop_front();
-			moveNostop(floors);
-		}
-		else {
-			call floors = floorCalls.front();
-			floorCalls.pop_front();
-			moveToFloor(floors);
-		}
-	}
-	if (floorCalls.empty()) {
-		return;
-	}
-}
 
 void building::simulate(){
 	int index = 0;
@@ -155,4 +63,17 @@ void building::simulate(){
 		index++;
 	}
 
+}
+
+
+void building::checkCalls() {
+	while (!floorCalls.empty()) {
+		call floors = floorCalls.front();
+		floorCalls.pop_front();
+		elvator.addDestination(floors.floorID);
+		elvator.move();
+		}
+	if (floorCalls.empty()) {
+		return;
+	}
 }
