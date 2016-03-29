@@ -11,18 +11,21 @@ class elevate {
 private:
 	int numPeople = 0;
 	int level = 0;
-	bool Up, Down;
-	
+
 public:
 	list<person> people;
 	list<Floor>::iterator current_floor;
 	list<int> destinations;
+	list<int>* floorcalls;
+	void move();
 	void moveUp();
 	void moveDown();
 	int getLevel();
 	int getNumPeople();
+	bool hasRequests(list<int> List);
 	void checkPeople();
 	void ConnectItr(list<Floor> List);
 	bool isFull();
 	void addPerson(person newP);
+	void addDestination(int dest);
 };

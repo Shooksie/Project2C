@@ -26,4 +26,5 @@ public:
 	void checkCalls();
 	elevate elvator;
 	void generate(int traffic, int floors);
+	void moveCalls();
 };

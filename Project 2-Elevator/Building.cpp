@@ -71,9 +71,34 @@ void building::checkCalls() {
 		call floors = floorCalls.front();
 		floorCalls.pop_front();
 		elvator.addDestination(floors.floorID);
+		moveCalls();
 		elvator.move();
 		}
 	if (floorCalls.empty()) {
 		return;
 	}
+}
+
+
+void building::moveCalls() {
+	if (!floorCalls.empty()) {
+		int destination = elvator.destinations.front();
+		elvator.getLevel();
+		list<call>::iterator itr;
+		for (itr = floorCalls.begin(); itr != floorCalls.end(); itr++) {
+			if (destination > elvator.getLevel()) {
+				if (itr->floorID < destination && itr->up && itr->floorID >= elvator.getLevel()) {
+					elvator.addDestination(itr->floorID);
+					floorCalls.erase(itr);
+				}
+			}
+			if (destination < elvator.getLevel()) {
+				if (itr->floorID > destination && !itr->up && itr->floorID <= elvator.getLevel()) {
+					elvator.addDestination(itr->floorID);
+					floorCalls.erase(itr);
+				}
+			}
+		}
+	}
+	return;
 }

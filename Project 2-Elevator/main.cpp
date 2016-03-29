@@ -5,6 +5,13 @@
 using namespace std;
 
 void main(){
+	int numberOfPeople = 0;
+	building Building;
+	Building.Connect();
+	Building.generate();
+	Building.generate();
+	Building.generate();
+
 	bool reloop = true;
 	while (reloop) {
 		int choice;
@@ -38,5 +45,5 @@ void main(){
 			cout << "Please Enter a valid Option";
 			break;
 		}
-	}
+	}*/
 }
