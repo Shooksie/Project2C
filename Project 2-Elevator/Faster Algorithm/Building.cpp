@@ -24,7 +24,7 @@ void building::moveCalls() {
 		for (int i = 0; i < elevators.size(); i++) {
 			if (diffrence > (elevators[i].getLevel()- itr->floor)) {
 				closest = i;
-				diffrence = elevators[i].getLevel();
+				diffrence = elevators[i].getLevel()-itr->floor;
 			}
 		}
 		elevators[closest].addDestination(itr->floor);
@@ -43,5 +43,16 @@ void building::moveElevators() {
 	}
 	for (int z = 0; z < elevators.size(); z++) {
 		elevators[z].move();
+	}
+}
+void building::simulate() {
+	int count;
+	int index = 0; while (index < 100) {
+		while (!floorCall.empty()) {
+			for (int i = 0; i < elevators.size(); i++) {
+				elevators[i].move();
+			}
+			count++;
+		}
 	}
 }
