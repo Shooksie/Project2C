@@ -11,13 +11,11 @@ class elevate {
 private:
 	int numPeople = 0;
 	int level = 0;
-
+	
 public:
 	list<person> people;
 	list<Floor>::iterator current_floor;
 	list<int> destinations;
-	list<int>* floorcalls;
-	void move();
 	void moveUp();
 	void moveDown();
 	int getLevel();
