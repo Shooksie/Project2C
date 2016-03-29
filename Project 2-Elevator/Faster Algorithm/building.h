@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
-#include "Elevator.h"
+#include <list>
+
 
 using namespace std;
 
@@ -18,7 +19,9 @@ private:
 	int ID, current, direction;
 	list<int>::iterator elevator;
 	list<int> destinations;
-	building* building;
+	building* buildings;
+	bool up;
+	bool moving;
 };
 
 class building {
@@ -36,5 +39,5 @@ private:
 	vector<Elevator> elevators;
 	int elevatorNumber;
 	int floorNumbers;
-	
+	void simulate();
 };
