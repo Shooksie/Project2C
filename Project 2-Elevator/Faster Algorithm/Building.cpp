@@ -22,9 +22,9 @@ void building::moveCalls() {
 	for (itr = floorCall.begin(); itr != floorCall.end(); itr++) {
 		int closest = 0; int diffrence = 100;
 		for (int i = 0; i < elevators.size(); i++) {
-			if (diffrence > (elevators[i].getLevel()- itr->floor)) {
+			if (diffrence >(elevators[i].getLevel() - itr->floor)) {
 				closest = i;
-				diffrence = elevators[i].getLevel()-itr->floor;
+				diffrence = elevators[i].getLevel() - itr->floor;
 			}
 		}
 		elevators[closest].addDestination(itr->floor);
@@ -46,7 +46,7 @@ void building::moveElevators() {
 	}
 }
 void building::simulate() {
-	int count;
+	int count=0;
 	int index = 0; while (index < 100) {
 		while (!floorCall.empty()) {
 			for (int i = 0; i < elevators.size(); i++) {
@@ -54,5 +54,33 @@ void building::simulate() {
 			}
 			count++;
 		}
+	}
+}
+
+void building::generate() {
+
+	int current_floor = rand() % 10;
+	int desired_floor = rand() % 10;
+	while (current_floor == desired_floor) {
+		desired_floor = rand() % 10;
+	}
+
+	call newCall;
+	newCall.floor = current_floor;
+	newCall.goal = desired_floor;
+	if (current_floor < desired_floor) {
+		newCall.direction = 1;
+		floorCall.push_back(newCall);
+		return;
+	}
+	else if (current_floor > desired_floor) {
+		newCall.direction = 0;
+		floorCall.push_back(newCall);
+		return;
+	}
+	else {
+		newCall.direction = -1;
+		floorCall.push_back(newCall);
+		return;
 	}
 }
